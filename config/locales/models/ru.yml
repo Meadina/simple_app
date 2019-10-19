@@ -1,0 +1,26 @@
+ru:
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+
+    models:
+      user:
+
+    attributes:
+      user:
+        id: Идентификатор
+        name: Имя
+        email: Адрес электронной почты
+        password: Пароль
+        password_confirmation: Подтверждение пароля
+        current_sign_in_at: Время последнего входа
+        current_password: Текущий пароль
+        remember_me: Оставаться в системе
+        encrypted_password: Пароль
+        remember_created_at: Оставаться в системе (время и дата)
+        sign_in_count: Вход, количество
+        last_sign_in_at: Последний вход в
+        created_at: Дата создания
+        updated_at: Дата обновления

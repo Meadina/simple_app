@@ -1,0 +1,11 @@
+<tr>
+  <td><%= user.id %></td>
+  <td><%= link_to user.name, user %></td>
+  <td><%= user.created_at.strftime("%d-%m-%Y %H:%M") %></td>
+  <td><%= user.last_sign_in %></td>
+  <% if current_user.admin? && !current_user?(user) %>
+    <td><%= link_to 'Редактировать', edit_user_path(user) %></td>
+    <td><%= link_to "Удалить", user, method: :delete,
+                data: { confirm: "Удалить пользователя?" } %></td>
+  <% end %>
+</tr>

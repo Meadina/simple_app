@@ -1,0 +1,35 @@
+<header class="navbar navbar-fixed-top navbar-inverse bg-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <a class="navbar-brand">
+        <%= link_to "Тестовое задание", root_path, id: "logo" %>
+      </a>
+    </div>
+      <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="nav-item">
+              <%= link_to "Домашняя страница", root_path %>
+            </li>
+            <li class="nav-item"><%= link_to "О сайте", help_path %>
+            </li>
+            <% if logged_in? %>
+              <li class="nav-item">
+                <%= current_user.name %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Настройки", edit_user_path(current_user)%>
+              </li>
+              <li>
+                <%= link_to "Выйти", logout_path, method: "delete" %>
+              </li>
+            <% else %>
+          <li>
+            <%= link_to "Войти", login_path, class: "btn btn-outline-info my-2 my-sm-0" %>
+          </li>
+        <% end %>
+        </ul>
+    </nav>
+
+  </div>
+
+</header>

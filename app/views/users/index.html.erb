@@ -1,0 +1,28 @@
+<% provide(:title, 'Все пользователи') %>
+<h1>Все пользователи</h1>
+
+<div class="center">
+  <%= link_to "Добавить нового пользователя", signup_path, class: "btn btn-primary" %>
+</div>
+<ul class="users">
+
+  <%= will_paginate %>
+
+  <table>
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Имя</th>
+        <th>Дата регистрации</th>
+        <th>Дата последнего входа</th>
+        <th colspan="3"></th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+          <%= render @users %>
+    </tbody>
+  </table>
+</ul>
+
+<%= will_paginate %>
