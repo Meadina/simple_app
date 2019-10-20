@@ -1,9 +1,8 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: %i[edit update]
-  before_action :correct_user,   only: %i[edit update]
-  before_action :admin_user,     only: %i[index destroy]
+  before_action :logged_in_user, only: %i[show]
+  before_action :admin_user,     only: %i[create edit index destroy]
 
   def index
     @users = User.paginate(page: params[:page])
@@ -21,30 +20,16 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-  end
-
-  def add
-    @user = User.new(user_params)
-    if @user.save
-      flash[:success] = 'Пользователь успешно добавлен'
-      redirect_to users_url
-    else
-      render 'new'
+    if !current_user.admin?
+      redirect_to(current_user) unless current_user?(@user)
     end
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
-      if !current_user
-        log_in @user
-        remember @user
-        flash[:success] = 'Добро пожаловать!'
-        render 'edit'
-      else
-        flash[:success] = 'Пользователь успешно добавлен'
-        redirect_to users_url
-      end
+      flash[:success] = 'Пользователь успешно добавлен'
+      render 'edit'
     else
       render 'new'
     end
@@ -58,10 +43,18 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       flash[:success] = 'Профиль обновлен'
-      redirect_to @user
+      redirect_to users_url
     else
       render 'edit'
     end
+  end
+
+
+  private
+
+  def user_params
+    params.require(:user).permit(:name, :password,
+                                 :password_confirmation, :comment, :last_sign_in)
   end
 
   def logged_in_user
@@ -79,12 +72,5 @@ class UsersController < ApplicationController
 
   def admin_user
     redirect_to(root_url) unless current_user.admin?
-  end
-
-  private
-
-  def user_params
-    params.require(:user).permit(:name, :password,
-                                 :password_confirmation, :comment, :last_sign_in)
   end
 end

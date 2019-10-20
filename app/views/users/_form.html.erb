@@ -10,5 +10,8 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation, class: 'form-control' %>
 
+  <%= f.label :comment, "Комментарий" %>
+  <%= f.text_field :comment, class: 'form-control' %>
+  
   <%= f.submit yield(:button_text), class: "btn btn-primary" %>
 <% end %>

@@ -5,10 +5,10 @@
     <title><%= full_title(yield(:title)) %></title>
   </head>
   <body>
-    <div class="center jumbotron">
+    <div class="center">
       <% if logged_in? %>
         <h1>
-          Привет, <%= current_user.name %>
+          Вы авторизованы как <%= current_user.name %>
         </h1>
         <% if current_user.admin? %>
           <%= link_to "Панель администратора", users_path, class: "btn btn-success" %>
@@ -18,7 +18,7 @@
         <div>
           <%= image_tag("cat.png", size: "152x93") %>
         </div>
-        <%= link_to "Зарегистрироваться", signup_path, class: "btn btn-primary btn-lg" %>
+        <%= link_to "Войти в систему", login_path, class: "btn btn-primary btn-lg" %>
       <% end %>
     </div>
   </body>

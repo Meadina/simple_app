@@ -6,9 +6,8 @@ class SessionsController < ApplicationController
   def create
     user = User.find_by(name: params[:session][:name])
     if user&.authenticate(params[:session][:password])
+      user.last_sign_in = Time.now
       log_in user
-      params[:session][:remember_me] == '1' ? remember(user) : forget(user)
-      
       redirect_to root_url
     else
       flash.now[:danger] = 'Неверный логин/пароль!'
