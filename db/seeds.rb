@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 User.create!(name: "Admin",
-             password: "125634",
-             password_confirmation: "125634",
+             password: "password",
+             password_confirmation: "password",
              admin: true)
 
 40.times do |n|

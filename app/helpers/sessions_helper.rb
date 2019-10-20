@@ -2,7 +2,7 @@
 
 module SessionsHelper
   def log_in(user)
-    user.last_sign_in = Time.now
+    user.update_attribute(:last_sign_in, Time.current)
     session[:user_id] = user.id
   end
 
