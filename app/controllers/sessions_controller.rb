@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class SessionsController < ApplicationController
-
+  before_action :logged_in_user, only: :create
   def new; end
 
   def create
@@ -20,4 +20,11 @@ class SessionsController < ApplicationController
     redirect_to root_url
   end
 
+  private
+  def logged_in_user
+    if logged_in?
+      flash[:danger] = 'Вы уже вошли в систему'
+      redirect_to root_path
+    end
+  end
 end
